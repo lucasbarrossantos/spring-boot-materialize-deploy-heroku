@@ -68,8 +68,9 @@ public class TitulosController {
                                   HttpServletRequest httpServletRequest){
 
         ModelAndView mv = new ModelAndView("titulo/PesquisarTitulos");
+
         mv.addObject("listaDeEntidades", titulos.entidadesDosTitulos());
-        String descricao = titulo.getDescricao() == null ? "%" : titulo.getDescricao();
+        String descricao = titulo.getDescricao() == null ? "%" : titulo.getDescricao().toLowerCase();
 
         PageWrapper<Titulo> paginaWrapper =
                 new PageWrapper<>(titulos.filtrados(descricao, titulo.getEntidade(), pageable), httpServletRequest);
