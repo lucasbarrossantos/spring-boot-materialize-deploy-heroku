@@ -1,16 +1,12 @@
 package com.crud.financeiro.controller;
 
-import com.crud.financeiro.dto.RelatorioContasAReceber;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
+import com.crud.financeiro.dto.RelatorioContasAReceber;;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
