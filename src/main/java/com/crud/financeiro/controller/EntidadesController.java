@@ -59,7 +59,7 @@ public class EntidadesController {
 
         ModelAndView mv = new ModelAndView("entidade/PesquisarEntidade");
         PageWrapper<Entidade> paginaWrapper =
-                new PageWrapper<>(entidades.porNome(entidade.getNome(), pageable), httpServletRequest);
+                new PageWrapper<>(entidades.porNome(entidade.getNome().toLowerCase(), pageable), httpServletRequest);
 
         mv.addObject("pagina", paginaWrapper);
         return mv;
