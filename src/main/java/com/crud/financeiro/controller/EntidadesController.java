@@ -58,8 +58,9 @@ public class EntidadesController {
                                   HttpServletRequest httpServletRequest) {
 
         ModelAndView mv = new ModelAndView("entidade/PesquisarEntidade");
+        String nome = entidade.getNome() == null ? "%" : entidade.getNome().toLowerCase();
         PageWrapper<Entidade> paginaWrapper =
-                new PageWrapper<>(entidades.porNome(entidade.getNome().toLowerCase(), pageable), httpServletRequest);
+                new PageWrapper<>(entidades.porNome(nome, pageable), httpServletRequest);
 
         mv.addObject("pagina", paginaWrapper);
         return mv;

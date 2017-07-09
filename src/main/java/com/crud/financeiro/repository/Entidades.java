@@ -15,7 +15,7 @@ public interface Entidades extends JpaRepository<Entidade, Long>{
 
     List<Entidade> findByNomeContainingIgnoreCase(String nome);
 
-    @Query("select e from Entidade e where nome like %?1% or ?1 is null order by e.nome")
+    @Query("select e from Entidade e where lower(nome) like %?1% or ?1 is null order by e.nome")
     Page<Entidade> porNome(String nome, Pageable pageable);
 
     @Query("select new com.crud.financeiro.dto.EntidadeDTO(codigo, nome) from Entidade where lower(nome) like %?1%")
