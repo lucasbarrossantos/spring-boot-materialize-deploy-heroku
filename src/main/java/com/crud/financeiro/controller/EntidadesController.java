@@ -8,6 +8,9 @@ import com.crud.financeiro.repository.Entidades;
 import com.crud.financeiro.service.EntidadesService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -56,11 +59,15 @@ public class EntidadesController {
     @RequestMapping
     public ModelAndView pesquisar(Entidade entidade, @PageableDefault(size = 3) Pageable pageable,
                                   HttpServletRequest httpServletRequest) {
-
         ModelAndView mv = new ModelAndView("entidade/PesquisarEntidade");
-        String nome = entidade.getNome() == null ? "%" : entidade.getNome().toLowerCase();
+
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("nome", condicao -> condicao.startsWith().ignoreCase());
+
+        Page<Entidade> page = entidades.findAll(Example.of(entidade, matcher), pageable);
+
         PageWrapper<Entidade> paginaWrapper =
-                new PageWrapper<>(entidades.porNome(nome, pageable), httpServletRequest);
+                new PageWrapper<>(page, httpServletRequest);
 
         mv.addObject("pagina", paginaWrapper);
         return mv;
@@ -77,7 +84,7 @@ public class EntidadesController {
     public String excluir(@PathVariable("codigo") Long codigo, RedirectAttributes attributes) {
         try {
             entidadesService.remover(codigo);
-        }catch (NegocioException e){
+        } catch (NegocioException e) {
             attributes.addFlashAttribute("mensagemErro", e.getMessage());
             return "redirect:/entidades";
         }

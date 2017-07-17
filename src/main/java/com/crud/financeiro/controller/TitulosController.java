@@ -10,6 +10,9 @@ import com.crud.financeiro.repository.TiposDePagamento;
 import com.crud.financeiro.repository.Titulos;
 import com.crud.financeiro.service.TitulosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
@@ -68,7 +71,6 @@ public class TitulosController {
                                   HttpServletRequest httpServletRequest){
 
         ModelAndView mv = new ModelAndView("titulo/PesquisarTitulos");
-
         mv.addObject("listaDeEntidades", titulos.entidadesDosTitulos());
         String descricao = titulo.getDescricao() == null ? "%" : titulo.getDescricao().toLowerCase();
 
