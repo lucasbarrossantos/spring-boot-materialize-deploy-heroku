@@ -110,6 +110,17 @@
 </section>
 <th:block layout:fragment="javascript-extra">
     <script th:src="@{/javascript/financeiro.js}"></script>
+    <script>
+        $("input[id*='cpfOuCnpj']").inputmask({
+            mask: ['999.999.999-99', '99.999.999/9999-99'],
+            keepStatic: true
+        });
+
+        $("input[id*='telefone']").inputmask({
+            mask: ['(99) 9999-9999', '(99)9 9999-9999'],
+            keepStatic: true
+        });
+    </script>
 </th:block>
 
 </html>
